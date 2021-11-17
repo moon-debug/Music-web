@@ -21,7 +21,7 @@ export default memo(function MNDiscover(props) {
               return (
                 <div className="item" key={item.title}>
                   <NavLink to={item.link}>
-                    <em>{item.title}{index == 2 && <span>®</span>}</em>
+                    <em>{item.title}{index === 2 && <span>®</span>}</em>
                   </NavLink>
                 </div>
               )
