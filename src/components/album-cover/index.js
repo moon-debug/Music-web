@@ -12,6 +12,7 @@ export default memo(function MNAlbumCover(props) {
       <div className="album-image">
         <img src={getSizeImage(info.picUrl, size)} alt={info.name}/>
         <a href="/todo" className="cover sprite_cover">{info.name}</a>
+        <a href="/#" className="icon-play sprite_icon">播放</a>
       </div>
       <div className="album-info">
         <div className="name">{info.name}</div>

@@ -40,7 +40,7 @@ export const SongsCoverWrapper = styled.div`
           margin-right: 5px;
           display: inline-block;
           width: 14px;
-          height: 11px;
+          height: 10px;
           background-position: 0 -24px;
         }
 
@@ -49,6 +49,11 @@ export const SongsCoverWrapper = styled.div`
           width: 16px;
           height: 17px;
           background-position: 0 0;
+          cursor: pointer;
+
+          :hover {
+            background-position-y: -60px;
+          }
         }
       }
     }

@@ -1,9 +1,9 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const DiscoverWrapper = styled.div`
   .top {
     height: 29px;
-    background-color: #C20C0C;
+    background-color: #c20c0c;
     border-bottom: 1px solid #a40011;
 
     .menu {
@@ -26,19 +26,20 @@ export const DiscoverWrapper = styled.div`
             border-radius: 20px;
 
             &:hover {
-              background-color: #9B0909;
+              background-color: #9b0909;
             }
           }
 
           &.active em {
-            background-color: #9B0909;
+            background-color: #9b0909;
           }
-
-          
         }
 
         :nth-child(3) {
-            position: relative;
+          position: relative;
+
+          em {
+            padding-right: 17px;
 
             span {
               position: absolute;
@@ -50,11 +51,10 @@ export const DiscoverWrapper = styled.div`
               transform: scale(0.85);
             }
           }
+        }
       }
     }
   }
-`
+`;
 
-export const TopMenu = styled.div`
-
-`
+export const TopMenu = styled.div``;

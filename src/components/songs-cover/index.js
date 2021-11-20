@@ -15,7 +15,7 @@ export default memo(function MNSongsCover(props) {
           <div className="info sprite_cover">
             <span>
               <i className="sprite_icon ear"></i>
-              {getCount(info.playCount)}
+              <span className="count">{getCount(info.playCount)}</span>
             </span>
             <i className="sprite_icon play"></i>
           </div>

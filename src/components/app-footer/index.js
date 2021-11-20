@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, Fragment } from 'react';
 
 import { footerLinks, footerImages } from '@/common/local-data';
 
@@ -7,7 +7,6 @@ import {
   FooterLeft,
   FooterRight
 } from './style';
-import { Fragment } from 'react/cjs/react.production.min';
 
 export default memo(function MNAppFooter() {
   return (

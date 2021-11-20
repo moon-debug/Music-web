@@ -45,6 +45,10 @@ export const TopRankingWrapper = styled.div`
       .favor {
         background-position: -300px -205px;
       }
+
+      .play:hover, .favor:hover {
+        background-position-y: -235px;
+      }
     }
   }
 
@@ -100,10 +104,18 @@ export const TopRankingWrapper = styled.div`
             position: relative;
             top: 2px;
             background-position: 0 -700px;
+
+            :hover {
+              background-position-x: -22px;
+            }
           }
 
           .favor {
             background-position: -297px -268px;
+          }
+
+          .play:hover, .favor:hover {
+            background-position-y: -288px;
           }
         }
       }
