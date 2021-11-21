@@ -69,12 +69,14 @@ export const HeaderLeft = styled.div`
       .active .icon {
         position: absolute;
         display: inline-block;
+        overflow: hidden;
         width: 12px;
         height: 7px;
         bottom: -1px;
         left: 50%;
         transform: translate(-50%, 0);
-        background-position: -226px 0;
+        background-position: -105px -70px;
+        background-size: 120px auto;
       }
     }
   }

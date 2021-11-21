@@ -8,6 +8,7 @@ import MNSongs from "@/pages/discover/c-pages/songs"
 import MNDjradio from "@/pages/discover/c-pages/djradio"
 import MNArtist from "@/pages/discover/c-pages/artist"
 import MNAlbum from "@/pages/discover/c-pages/album"
+import MNPlayer from "../pages/player"
 
 import MNMine from "@/pages/mine"
 import MNFriend from "@/pages/friend"
@@ -54,6 +55,10 @@ const routes = [
       {
         path: "/discover/album",
         component: MNAlbum
+      },
+      {
+        path: "/discover/player",
+        component: MNPlayer
       }
     ]
   },

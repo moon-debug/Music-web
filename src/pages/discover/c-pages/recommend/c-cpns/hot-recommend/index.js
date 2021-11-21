@@ -13,7 +13,7 @@ import { getHotRecommendsAction } from '../../store/actionCreators'
 
 export default memo(function MNHotRecommend() {
   // redux hooks
-  const { hotRecommends } = useSelector(state => ({
+  const { hotRecommends = [] } = useSelector(state => ({
     hotRecommends: state.getIn(["recommend", "hotRecommends"])
   }), shallowEqual);
 

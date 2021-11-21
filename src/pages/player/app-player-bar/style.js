@@ -4,6 +4,7 @@ import sprite_icon from "@/assets/img/sprite_icon.png";
 import sprite_icn from "@/assets/img/sprite_icn.png";
 
 export const PlayerBarWrapper = styled.div`
+  z-index: 99;
   position: fixed;
   left: 0;
   right: 0;
@@ -75,6 +76,22 @@ export const PlayInfo = styled.div`
     width: 34px;
     height: 34px;
     border-radius: 5px;
+    position: relative;
+
+    img {
+      width: 34px;
+      height: 34px;
+    }
+
+    .mask {
+      position: absolute;
+      display: block;
+      top: 0;
+      left: 0;
+      width: 34px;
+      height: 35px;
+      background-position: 0 -80px;
+    }
   }
 
   .info {
@@ -100,7 +117,7 @@ export const PlayInfo = styled.div`
       .link {
         display: inline-block;
         position: relative;
-        top: 2px;
+        top: 3px;
         width: 14px;
         height: 15px;
         text-indent: -9999px;
@@ -167,7 +184,7 @@ export const PlayInfo = styled.div`
 export const Operator = styled.div`
   display: flex;
   position: relative;
-  top: 5px;
+  top: 2px;
 
   .btn {
     display: inline-block;
@@ -242,7 +259,10 @@ export const Operator = styled.div`
 
     .playlist {
       width: 59px;
+      padding-left: 21px;
       background-position: -42px -68px;
+      text-indent: 0;
+      color: #666;
 
       :hover {
         background-position-y: -98px;

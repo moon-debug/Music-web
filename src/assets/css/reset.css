@@ -109,3 +109,12 @@ body, textarea, select, input, button {
 .sprite_playbar {
   background: url(../img/playbar_sprite.png) no-repeat;
 }
+
+.lyric-class .ant-message-notice-content {
+  position: fixed;
+  bottom: 50px;
+  transform: translateX(-50%);
+  padding: 3px 8px;
+  color: #fff;
+  background: rgba(100, 100, 100, .5);
+}

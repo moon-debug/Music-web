@@ -9,7 +9,7 @@ import MNThemeHeaderRCM from '@/components/theme-header-rcm';
 import { AlbumWrapper } from './style';
 
 export default memo(function MNNewAlbum() {
-  const { newAlbums } = useSelector(state => ({
+  const { newAlbums = [] } = useSelector(state => ({
     newAlbums: state.getIn(["recommend", "newAlbums"])
   }), shallowEqual)
 

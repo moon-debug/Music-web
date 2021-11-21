@@ -17,13 +17,13 @@ export default memo(function MNAppHeader() {
     if (index < 3) {
       return (
         <NavLink to={item.link}>
-          {item.title}
-          <i className="sprite_01 icon"></i>
+          <em>{item.title}</em>
+          <i className="sprite_01 icon"> </i>
         </NavLink>)
     } else {
       return (
         <a href={item.link}>
-          {item.title}
+          <em>{item.title}</em>
         </a>)
     }
   }

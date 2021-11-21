@@ -1,12 +1,22 @@
-import React, { memo } from 'react'
+import React, { memo } from 'react';
 
-import { getSizeImage } from '@/utils/format-utils.js'
+import { getSizeImage } from '@/utils/format-utils.js';
+import { getSongDetailAction } from '@/pages/player/store'
 
 import { TopRankingWrapper } from './style'
+import { useDispatch } from 'react-redux';
 
 export default memo(function MNTopRanking(props) {
   const { info } = props;
   const { tracks = [] } = info;
+
+  // redux hooks
+  const dispatch = useDispatch();
+
+  // other handle
+  const playMusic = (item) => {
+    dispatch(getSongDetailAction(item.id))
+  }
 
   return (
     <TopRankingWrapper>
@@ -32,7 +42,8 @@ export default memo(function MNTopRanking(props) {
                 <div className="info">
                   <a href={`https://music.163.com/#/song?id=${item.id}`} className="name text-nowrap">{item.name}</a>
                   <div className="operate">
-                    <button className="btn sprite_02 play"></button>
+                    <button className="btn sprite_02 play"
+                            onClick={e => playMusic(item)}></button>
                     <button className="btn sprite_icon2 addto"></button>
                     <button className="btn sprite_02 favor"></button>
                   </div>

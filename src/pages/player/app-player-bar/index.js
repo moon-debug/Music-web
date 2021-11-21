@@ -2,15 +2,21 @@ import React, { memo, useState, useEffect, useRef, useCallback } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 
 import { getSizeImage, formatDate, getPlaySong } from '@/utils/format-utils.js'
+import { 
+  getSongDetailAction,
+  changeSequenceAction,
+  changeCurrentSongAndIndexAction,
+  changeCurrentLyricIndexAction
+} from '../store/actionCreators';
 
-import { Slider } from 'antd';
+import { NavLink } from 'react-router-dom';
+import { Slider, message } from 'antd';
 import { 
   PlayerBarWrapper,
   Control,
   PlayInfo,
   Operator
 } from './style';
-import { getSongDetailAction } from '../store/actionCreators';
 
 export default memo(function MNAppPlayerBar() {
   // state
@@ -20,22 +26,37 @@ export default memo(function MNAppPlayerBar() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   // redux hooks
-  const {currentSong} = useSelector(state => ({
-    currentSong: state.getIn(["player", "currentSong"])
+  const {
+    currentSong,
+    sequence,
+    playList,
+    lyricArray,
+    currentLyricIndex
+  } = useSelector(state => ({
+    currentSong: state.getIn(["player", "currentSong"]),
+    sequence: state.getIn(["player", "sequence"]),
+    playList: state.getIn(["player", "playList"]),
+    lyricArray: state.getIn(["player", "lyricArray"]),
+    currentLyricIndex: state.getIn(["player", "currentLyricIndex"])
   }), shallowEqual);
 
   const dispatch = useDispatch();
 
   // other hooks
+  const audioRef = useRef();
+
   useEffect(() => {
     dispatch(getSongDetailAction(1330472048))
   }, [dispatch]);
 
   useEffect(() => {
     audioRef.current.src = getPlaySong(currentSong.id);
+    audioRef.current.play().then(()=> {
+      setIsPlaying(true);
+    }).catch(() => {
+      setIsPlaying(false);
+    }) 
   }, [currentSong]);
-
-  const audioRef = useRef();
 
   // other handle
   const picUrl = (currentSong.al && currentSong.al.picUrl) || "";
@@ -52,9 +73,51 @@ export default memo(function MNAppPlayerBar() {
 
   const timeUpdate = e => {
     // console.log(e.target.currentTime);
+    const nowTime = e.target.currentTime;
     if (!isChanging) {
-      setCurrentTime(e.target.currentTime * 1000);
+      setCurrentTime(nowTime * 1000);
       setProgress(currentTime / duration * 100);
+    }
+
+    // 获取当前歌词
+    let i = 1;
+    for (; i < lyricArray.length; i++) {
+      let lyricItem = lyricArray[i];
+      if (currentTime < lyricItem.time) {
+        break;
+      }
+    }
+    if (currentLyricIndex !== i - 1) {
+      dispatch(changeCurrentLyricIndexAction(i-1));
+      // console.log(lyricArray && lyricArray[i-1].content);
+      message.open({
+        key: "lyric",
+        content: lyricArray && lyricArray[i-1].content,
+        duration: 0,
+        className: "lyric-class"
+      })
+    }
+  }
+
+  const changeSequence = () => {
+    let currentSequence = (sequence + 1) % 3;
+    dispatch(changeSequenceAction(currentSequence));
+  }
+
+  const changeMusic = (tag) => {
+    dispatch(changeCurrentSongAndIndexAction(tag));
+    audioRef.current.currentTime = 0;
+    if(!isPlaying) {
+      playMusic();
+    }
+  }
+
+  const handleMusicEnded = () => {
+    if (sequence === 2 || playList.length === 1) { // 单曲循环或列表中只有一首歌时
+      audioRef.current.currentTime = 0;
+      audioRef.current.play();
+    } else {
+      dispatch(changeCurrentSongAndIndexAction(1));     
     }
   }
 
@@ -82,15 +145,17 @@ export default memo(function MNAppPlayerBar() {
     <PlayerBarWrapper className="sprite_playbar">
       <div className="content wrap-v2">
         <Control isPlaying={isPlaying}>
-          <button className="sprite_playbar prev"></button>
-          <button className="sprite_playbar play" onClick={() => playMusic()}></button>
-          <button className="sprite_playbar next"></button>
+          <button className="sprite_playbar prev"
+                  onClick={e => changeMusic(-1)}></button>
+          <button className="sprite_playbar play"
+                  onClick={() => playMusic()}></button>
+          <button className="sprite_playbar next"
+                  onClick={e => changeMusic(1)}></button>
         </Control>
         <PlayInfo>
           <div className="image">
-            <a href="/#">
-              <img src={getSizeImage(picUrl, 35)} alt=""/>
-            </a>
+            <img src={getSizeImage(picUrl, 35)} alt=""/>
+            <NavLink to="/discover/player" className="sprite_playbar mask"/>
           </div>
           <div className="info">
             <div className="song">
@@ -111,20 +176,23 @@ export default memo(function MNAppPlayerBar() {
             </div>
           </div>
         </PlayInfo>
-        <Operator>
+        <Operator sequence={sequence}>
           <div className="left">
-            <a href="/#" className="sprite_playbar btn icn">画中画</a>
-            <a href="/#" className="sprite_playbar btn favor">喜欢</a>
-            <a href="/#" className="sprite_playbar btn share">分享</a>
+            <button className="sprite_playbar btn icn">画中画</button>
+            <button className="sprite_playbar btn favor">喜欢</button>
+            <button className="sprite_playbar btn share">分享</button>
           </div>
           <div className="right sprite_playbar">
-            <a href="/#" className="sprite_playbar btn volume">音量</a>
-            <a href="/#" className="sprite_playbar btn loop">循环</a>
-            <a href="/#" className="sprite_playbar btn playlist">列表</a>
+            <button className="sprite_playbar btn volume">音量</button>
+            <button className="sprite_playbar btn loop"
+                    onClick={e => changeSequence()}>循环</button>
+            <button className="sprite_playbar btn playlist">{playList.length}</button>
           </div>
         </Operator>
       </div>
-      <audio ref={audioRef} onTimeUpdate={timeUpdate}/>
+      <audio ref={audioRef}
+             onTimeUpdate={e => timeUpdate(e)}
+             onEnded={e => handleMusicEnded(e)}/>
     </PlayerBarWrapper>
   )
 })
