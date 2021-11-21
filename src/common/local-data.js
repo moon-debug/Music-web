@@ -21,7 +21,7 @@ export const headerLinks = [
   },
   {
     title: "下载客户端",
-    link: "https://music.163.com/#/download"
+    link: "/download"
   }
 ]
 

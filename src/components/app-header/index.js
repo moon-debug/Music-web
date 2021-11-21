@@ -14,7 +14,7 @@ import {
 export default memo(function MNAppHeader() {
   // 页面代码
   const showSelectItem = (item, index) => {
-    if (index < 3) {
+    if (index < 3 || index === 5) {
       return (
         <NavLink to={item.link}>
           <em>{item.title}</em>

@@ -24,6 +24,7 @@ const MNPlayer = React.lazy(_ => import("../pages/player"));
 
 const MNFriend = React.lazy(_ => import("../pages/friend"));
 const MNMine = React.lazy(_ => import("../pages/mine"));
+const MNDownload = React.lazy(_ => import("../pages/download"));
 
 const routes = [
   {
@@ -81,6 +82,10 @@ const routes = [
   {
     path: "/friend",
     component: MNFriend
+  },
+  {
+    path: "/download",
+    component: MNDownload
   }
 ];
 
