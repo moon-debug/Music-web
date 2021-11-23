@@ -33,7 +33,7 @@ export default memo(function MNAppHeader() {
     <HeaderWrapper>
       <div className="content wrap-v1">
         <HeaderLeft>
-          <h1 className="logo sprite_01"><a href="#/">网易云音乐</a></h1>
+          <h1 className="logo sprite_01"><a href="/#">网易云音乐</a></h1>
           <div className="select-list">
             {
               headerLinks.map((item, index) => {

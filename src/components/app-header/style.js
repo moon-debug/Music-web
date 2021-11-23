@@ -26,11 +26,14 @@ export const HeaderLeft = styled.div`
     width: 176px;
     height: 70px;
     background-position: 0 0;
-    text-indent: -9999px;
+
   }
 
   .logo a {
-    padding-right: 20px;
+    display: block;
+    width: 176px;
+    height: 100%;
+    text-indent: -9999px;
   }
 
   .select-list {
