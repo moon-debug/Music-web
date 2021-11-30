@@ -40,7 +40,7 @@ export default memo(function MNTopRanking(props) {
               <div key={item.id} className="list-item">
                 <div className="rank">{index + 1}</div>
                 <div className="info">
-                  <a href={`https://music.163.com/#/song?id=${item.id}`} className="name text-nowrap">{item.name}</a>
+                  <a href="/#" className="name text-nowrap">{item.name}</a>
                   <div className="operate">
                     <button className="btn sprite_02 play"
                             onClick={e => playMusic(item)}></button>
