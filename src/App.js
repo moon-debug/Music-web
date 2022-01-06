@@ -24,4 +24,3 @@ export default memo(function App() {
     </Provider>
   )
 })
-

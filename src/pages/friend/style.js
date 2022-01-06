@@ -18,7 +18,7 @@ export const FriendWrapper = styled.div`
       display: block;
       width: 157px;
       height: 48px;
-      margin-top: 46px;
+      margin-top: 44px;
       text-indent: -9999px;
       background: url(${friend_notlogin}) no-repeat 0 -430px;
 

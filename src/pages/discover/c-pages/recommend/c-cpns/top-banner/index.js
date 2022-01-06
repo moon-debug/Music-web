@@ -10,13 +10,10 @@ export default memo(function MNTopBanner() {
   // state
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const { topBanners = [] } = useSelector(
-    (state) => ({
-      // topBanners: state.get("recommend").get("topBanners")
-      topBanners: state.getIn(["recommend", "topBanners"]),
-    }),
-    shallowEqual
-  );
+  const { topBanners = [] } = useSelector((state) => ({
+    // topBanners: state.get("recommend").get("topBanners")
+    topBanners: state.getIn(["recommend", "topBanners"]),
+  }), shallowEqual);
 
   // 其他hooks
   const bannerRef = useRef();
